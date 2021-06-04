@@ -18,14 +18,10 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    // buscar todos os usuários
-
     public List<UserDTO> getAll() {
         List<User> usuarios = userRepository.findAll();
         return usuarios.stream().map(UserDTO::convert).collect(Collectors.toList());
     }
-
-    // buscar usuário por id
 
     public UserDTO findById(long userId) {
         Optional<User> usuario = userRepository.findById(userId);
@@ -35,14 +31,10 @@ public class UserService {
         return UserDTO.convert(usuario.get());
     }
 
-    // salvar um usuário
-
     public UserDTO save(UserDTO userDTO) {
         User user = userRepository.save(User.convert(userDTO));
         return UserDTO.convert(user);
     }
-
-    // deletar um usuário
 
     public UserDTO delete(long userId) {
         Optional<User> user = userRepository.findById(userId);
@@ -52,8 +44,6 @@ public class UserService {
         return null;
     }
 
-    // buscar um usuário por cpf
-
     public UserDTO findByCpf(String cpf) {
         User user = userRepository.findByCpf(cpf);
         if (user != null) {
@@ -61,8 +51,6 @@ public class UserService {
         }
         return null;
     }
-
-    // buscar usuários por nome
 
     public List<UserDTO> queryByName(String nome) {
         List<User> usuarios = userRepository.queryByNomeLike(nome);
